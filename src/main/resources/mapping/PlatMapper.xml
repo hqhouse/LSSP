@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emi.appclock.mapper.PlatMapper">
+
+    <select id="getCaseInquiry" resultType="java.util.Map">
+        select * from CaseInquiry
+        where 1=1
+        <if test="region!=null and region!=''">
+            and region = #{region}
+        </if>
+        <if test="case_type!=null and case_type!=''">
+            and case_type = #{case_type}
+        </if>
+        order by section_min desc
+    </select>
+
+    <select id="getCaseInquiryList" resultType="java.util.Map">
+        select * from CaseInquiry
+        where 1=1
+        <if test="region!=null and region!=''">
+            and region = #{region}
+        </if>
+        <if test="caseType!=null and caseType!=''">
+            and case_type = #{caseType}
+        </if>
+        order by Id desc
+    </select>
+
+    <insert id="addCaseInquiry" parameterType="java.util.Map">
+        insert into CaseInquiry(
+        <foreach collection="columnMap" item="value" index="key" separator=",">
+            ${key}
+        </foreach>
+        )
+        values(
+        <foreach collection="columnMap" item="value" index="key" separator=",">
+            #{value}
+        </foreach>
+        )
+    </insert>
+
+    <delete id="deleteCaseInquiry">
+        delete  from  CaseInquiry where  Id=#{id}
+    </delete>
+
+    <update id="updateCaseInquiry" parameterType="java.util.Map">
+        update  CaseInquiry set section_max=#{section_max},section_max_count=#{section_max_count},section_min=#{section_min},section_min_count=#{section_min_count},stage=#{stage}
+        where Id=#{Id}
+    </update>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,80 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8080/eureka/
+server:
+  port: 8086
+  servlet:
+    context-path:
+    session:
+      timeout: "PT10M"
+  address: 0.0.0.0
+spring:
+#  session:
+  application:
+    name: appclok
+    jmx:
+    enabled: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 100MB
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    url: jdbc:sqlserver://115.159.92.178:1433;DatabaseName=DBLaw
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: 2154056090
+    password: 5345200
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    filters: stat,wall,slf4j
+    initialSize: 5
+    maxActive: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 5
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    type: com.alibaba.druid.pool.DruidDataSource
+    validationQuery: SELECT 1
+  redis:
+    database: 2
+    host: 127.0.0.1
+    password:
+    port: 6379
+    timeout: 10000
+    #    sentinel:
+    #      master: mymaster
+    #      nodes:  192.168.1.254:26379,192.168.1.254:26380
+    jedis:
+      pool:
+        #最大连接数据库连接数,设 0 为没有限制
+        max-active: 8
+        #最大等待连接中的数量,设 0 为没有限制
+        max-idle: 8
+        #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        max-wait: -1
+        #最小等待连接中的数量,设 0 为没有限制
+        min-idle: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+      shutdown-timeout: 100
+mybatis:
+  configuration:
+    call-setters-on-nulls: true
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.emi.appclock.entity
+logging:
+  level:com.emi.appclock.mapper: debug
+#config: classpath:log4j2-spring.xml
+
+

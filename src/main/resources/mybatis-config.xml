@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  
+  <settings>		
+    <setting name="defaultExecutorType" value="REUSE" />
+    <setting name="logImpl" value="LOG4J2" />
+  </settings>
+ 
+  <typeAliases>
+  	
+  </typeAliases>
+  
+ <!-- 
+ <mappers>
+    <mapper resource="mapper/StudentMapper.xml"/>
+ </mappers>
+    <plugins>  
+       <plugin interceptor="net.wenyifan.common.mybatis.plugin.PageInterceptor">    
+       </plugin>  
+    </plugins>    
+-->
+  <plugins>
+    <plugin interceptor="com.github.pagehelper.PageHelper">
+      <property name="dialect" value="mysql"/>
+      <property name="offsetAsPageNum" value="false"/>
+      <property name="rowBoundsWithCount" value="false"/>
+      <property name="pageSizeZero" value="true"/>
+      <property name="reasonable" value="false"/>
+      <property name="supportMethodsArguments" value="false"/>
+      <property name="returnPageInfo" value="none"/>
+    </plugin>
+  </plugins>
+
+</configuration>
